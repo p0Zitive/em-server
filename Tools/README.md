@@ -1,1 +1,1 @@
-Directory for for external tools.
+Directory for external tools.
