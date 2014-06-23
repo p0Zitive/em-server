@@ -1,5 +1,3 @@
-require "rubygems"
-require "bundler"
 require 'em-websocket'
  
 index = 1
