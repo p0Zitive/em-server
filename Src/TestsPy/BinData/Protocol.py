@@ -1,18 +1,13 @@
-from ctypes import *
-
-class CustomProtocol( Structure ):
-	_fields_ = [( "command_word", c_char_p ), ( "op1", c_uint8 ), ( "op2", c_uint8 )]
-
+import array
+import struct
+import ctypes
 
 
-def MakeRequest( cmd, op1, op2 ):
-	command = CustomProtocol( cmd, op1, op2 )
-	return command
+class CustomProtocol( object ):
+	def __init__( self, cmd, op1, op2 ):
+		values = ( cmd, op1, op2 )
+		packetStruct = struct.Struct( '4s B B' )
 
+		self._packedData = array.array( 'c', '\0' * packetStruct.size )
 
-def PrintRequest( request ):
-
-
-request = MakeRequest( "HandShake", 65, 48 )
-
-print request
+		packetStruct.pack_into( self._packedData, 0, *values )
